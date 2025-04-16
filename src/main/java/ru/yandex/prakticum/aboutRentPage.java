@@ -1,7 +1,11 @@
-package ru.yandex.prakticum.POMfiles;
+package ru.yandex.prakticum;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class aboutRentPage {
 
@@ -16,37 +20,45 @@ public class aboutRentPage {
     private By rentTimeButton = By.xpath(".//div[@class = 'Dropdown-menu']/div[6]");
     //Кнопка "Далее" в правом нижнем углу
     private By continueOrderButton = By.xpath(".//div[@class = 'Order_Buttons__1xGrp']/button[contains(text(), 'Заказать')]");
+    //Кнопка "Заказать" в окне подтверждения заказа
+    private By confirmOrderButton = By.xpath(".//div[@class = 'Order_Buttons__1xGrp']/button[contains(text(), 'Да')]");
 
     public aboutRentPage(WebDriver driver){
         this.driver = driver;
     }
-
     //Заполнение поля Когда привести самокат
     public void setDeliveryData(){
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(deliveryData));
         driver.findElement(deliveryData).click();
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(deliveryDataButton));
         driver.findElement(deliveryDataButton).click();
     }
-    //Выбор значения в выподающем списке Срок аренды
+
+    //Выбор значения в выпадающем списке Срок аренды
     public void setRentTime(){
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(rentTime));
         driver.findElement(rentTime).click();
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(rentTimeButton));
         driver.findElement(rentTimeButton).click();
     }
-    //Клик на кнопку заказать
+
+    //Клик на кнопку "Заказать" для продолжения заказа
     public void clickContinueOrderButton(){
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(continueOrderButton));
         driver.findElement(continueOrderButton).click();
     }
 
-
-    //Заполенение всех поле на странице Про аренду
+    //Заполнение всех поле на странице Про аренду
     public  void fillInRentPage(){
         setRentTime();
         setDeliveryData();
         clickContinueOrderButton();
     }
-    //Кнопка Заказать в окне подтверждения заказа
-    private By confirmOrderButton = By.xpath(".//div[@class = 'Order_Buttons__1xGrp']/button[contains(text(), 'Да')]");
-    //Клик на кнопку Заказать
+
+    //Клик на кнопку "Заказать" для подтверждения заказа
     public void clickConfirmOrderButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(confirmOrderButton));
         driver.findElement(confirmOrderButton).click();
     }
+
 }

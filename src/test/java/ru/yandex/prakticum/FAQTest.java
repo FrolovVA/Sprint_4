@@ -1,27 +1,20 @@
 package ru.yandex.prakticum;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import ru.yandex.prakticum.POMfiles.mainSamokatPage;
-
-import java.time.Duration;
-
 
 @RunWith(Parameterized.class)
-public class chromeFAQTest {
+public class FAQTest {
     private WebDriver driver;
     private final int numb;
     private final String faqText;
+    private final DriverFactory driverFactory= new DriverFactory();
 
-
-    public chromeFAQTest(int numb, String faqText){
+    public FAQTest(int numb, String faqText){
         this.numb = numb;
         this.faqText = faqText;
     }
@@ -42,9 +35,8 @@ public class chromeFAQTest {
 
     @Before
     public void StartUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driverFactory.initDriver();
+        driver = driverFactory.getDriver();
     }
 
     @Test
@@ -58,10 +50,8 @@ public class chromeFAQTest {
         //Получаем все кнопки в виде листа и нажимаем на кнопку по порядку
         objectMainSamokatPage.getButtonsFAQ().get(numb).click();
         //Проверка соответствия текста
-        Assert.assertTrue("Элемент №" + numb + " соответствует", objectMainSamokatPage.getAnswersFAQ().get(numb).getText().equals(faqText));
-        //System.out.println(elements.get(numb).getText());
+        objectMainSamokatPage.checkTextAnswer(numb, faqText);
     }
-
 
     @After
     public void tearDown() {
@@ -69,3 +59,4 @@ public class chromeFAQTest {
     }
 
 }
+
