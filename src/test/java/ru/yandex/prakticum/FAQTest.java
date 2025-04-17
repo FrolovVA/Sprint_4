@@ -1,6 +1,7 @@
 package ru.yandex.prakticum;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,17 +41,17 @@ public class FAQTest {
     }
 
     @Test
-    public void FAQTest() throws InterruptedException {
+    public void CheckFAQTest() throws InterruptedException {
         //Открываем страницу ЯндексСамокат
         driver.get("https://qa-scooter.praktikum-services.ru/");
         //Создаем объект класса maniSamokatPage
-        mainSamokatPage objectMainSamokatPage = new mainSamokatPage(driver);
+        MainSamokatPage objectMainSamokatPage = new MainSamokatPage(driver);
         //Прокручиваем страницу до секции с вопросами
         objectMainSamokatPage.scrollToSectionFAQ();
         //Получаем все кнопки в виде листа и нажимаем на кнопку по порядку
         objectMainSamokatPage.getButtonsFAQ().get(numb).click();
         //Проверка соответствия текста
-        objectMainSamokatPage.checkTextAnswer(numb, faqText);
+        Assert.assertTrue("Элемент №" + numb + " соответствует", objectMainSamokatPage.getAnswersFAQ().get(numb).getText().equals(faqText));
     }
 
     @After

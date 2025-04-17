@@ -1,17 +1,15 @@
 package ru.yandex.prakticum;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
-public class mainSamokatPage {
+public class MainSamokatPage {
     private WebDriver driver;
     //Секция со списком вопросов и ответов
     private By sectionFAQ = By.className("Home_FAQ__3uVm4");
@@ -26,7 +24,7 @@ public class mainSamokatPage {
     //Надпись в окне "Заказ оформлен"
     private  By textOrderConfirmed = By.xpath(".//div[@class = 'Order_ModalHeader__3FDaJ']");
 
-    public mainSamokatPage(WebDriver driver) {
+    public MainSamokatPage(WebDriver driver) {
         this.driver = driver;
     }
     //Прокручиваем до секции вопросов и ответов
@@ -46,11 +44,6 @@ public class mainSamokatPage {
         List<WebElement> answersFAQ = driver.findElements(answerFAQ);
         return answersFAQ;
     }
-    //Проверяем правильность текста в ответах
-    public void checkTextAnswer(int numb, String faqText) {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(answerFAQ));
-        Assert.assertTrue("Элемент №" + numb + " соответствует", getAnswersFAQ().get(numb).getText().equals(faqText));
-    }
     //Клик по верхней кнопке Заказа
     public void clickUpperOrderButton(){
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(upperOrderButton));
@@ -60,6 +53,7 @@ public class mainSamokatPage {
     public void clickBottomOrderButton(){
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.presenceOfElementLocated(bottomOrderButton));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(bottomOrderButton));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(bottomOrderButton));
         driver.findElement(bottomOrderButton).click();
     }
 

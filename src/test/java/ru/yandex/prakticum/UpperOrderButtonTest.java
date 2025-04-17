@@ -41,17 +41,17 @@ public class UpperOrderButtonTest {
     }
 
     @Test
-    public void FAQTest() throws InterruptedException {
+    public void CheckUpperButtonOrderComplete() throws InterruptedException {
         //Открываем страницу ЯндексСамокат
         driver.get("https://qa-scooter.praktikum-services.ru/");
         //нажатие на верхнюю кнопку Заказать
-        mainSamokatPage objeckMainSamokatPage = new mainSamokatPage(driver);
+        MainSamokatPage objeckMainSamokatPage = new MainSamokatPage(driver);
         objeckMainSamokatPage.clickUpperOrderButton();
         //Заполнение данных о клиенте и переход на следующую станицу
-        aboutClientPage objeckAboutClientPage = new aboutClientPage(driver);
+        AboutClientPage objeckAboutClientPage = new AboutClientPage(driver);
         objeckAboutClientPage.fillInClientPage(clientName, clientSecondName, clientAdress, clientMetro, clientPhoneNumber);
         //Заполнение данных об аренде и переход к окну подтверждения
-        aboutRentPage objectAboutRentPage = new aboutRentPage(driver);
+        AboutRentPage objectAboutRentPage = new AboutRentPage(driver);
         objectAboutRentPage.fillInRentPage();
         //Подтверждение заказа
         objectAboutRentPage.clickConfirmOrderButton();

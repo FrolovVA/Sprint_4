@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class aboutClientPage {
+public class AboutClientPage {
 
     private WebDriver driver;
     //Поле ввода "Имя"
@@ -27,7 +27,7 @@ public class aboutClientPage {
     //Список подсказок для поля метро
     private By listMetro= By.className("select-search__select");
 
-    public aboutClientPage(WebDriver driver){
+    public AboutClientPage(WebDriver driver){
         this.driver = driver;
     }
     //Заполнения поля Имя

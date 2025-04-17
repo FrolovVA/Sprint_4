@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class aboutRentPage {
+public class AboutRentPage {
 
     private WebDriver driver;
     //Поле ввода "Когда привезти самокат"
@@ -23,7 +23,7 @@ public class aboutRentPage {
     //Кнопка "Заказать" в окне подтверждения заказа
     private By confirmOrderButton = By.xpath(".//div[@class = 'Order_Buttons__1xGrp']/button[contains(text(), 'Да')]");
 
-    public aboutRentPage(WebDriver driver){
+    public AboutRentPage(WebDriver driver){
         this.driver = driver;
     }
     //Заполнение поля Когда привести самокат
